@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - BasketballAddictsLDN</title>
+    <link rel="stylesheet" href="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/css/style.css">
+    <style>
+        /* CSS styles for body and HTML */
+        body, html {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #4a69bd, #6a89cc);
+            color: #ffffff;
+            text-align: center;
+        }
+        /* CSS styles for container */
+        .container {
+            max-width: 960px;
+            margin: auto;
+            padding: 20px;
+        }
+        /* CSS styles for input fields, buttons, and result display */
+        input[type="text"], input[type="date"], input[type="time"], input[type="number"], button {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: none;
+            width: 80%;
+        }
+        /* CSS styles for buttons */
+        button {
+            cursor: pointer;
+            background-color: #6a89cc;
+            color: white;
+            width: auto;
+        }
+        /* CSS styles for result display */
+        #result {
+            background-color: #ffffff;
+            color: #333;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        /* CSS styles for result display paragraphs */
+        #result p {
+            margin: 10px 0;
+        }
+        /* CSS styles for error messages */
+        #message, #infoMessage {
+            color: #ff0000;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header section -->
+    <header class="site-header">
+        <div class="container">
+            <!-- Logo linking to homepage -->
+            <h1 id="logo">
+                <a href="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/index.html" style="color: #ffffff; text-decoration: none;">
+                    <img src="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/images/bbicon.png" alt="Basketball Icon" height="35" /> BasketballAddictsLDN
+                </a>
+            </h1>
+        </div>
+    </header>
+
+    <!-- Main content section -->
+    <div class="container">
+        <!-- Title and description -->
+        <h2>Community</h2>
+        <p>Join or initiate basketball matches! Set up matches by including the name, location, date, time, and entry fee. Connect and compete with new players.</p>
+        <!-- Form for creating matches -->
+        <form id="createMatchForm">
+            <input type="text" id="matchName" placeholder="Name of the match" required>
+            <input type="text" id="matchPlace" placeholder="Location of the match" required>
+            <input type="date" id="matchDate" required>
+            <input type="time" id="matchTime" required>
+            <input type="number" id="matchFee" placeholder="Entry fee (£)" required>
+            <button type="button" onclick="submitMatch()">Create Match</button>
+        </form>
+        <!-- Display area for match information -->
+        <div id="result"></div>
+        <!-- Button to delete least recent match -->
+        <button type="button" onclick="deleteMatch()">Delete</button>
+        <!-- Button to show information -->
+        <button type="button" onclick="showInfo()">?</button>
+        <!-- Error messages -->
+        <p id="message"></p>
+        <p id="infoMessage"></p>
+    </div>
+
+    <!-- JavaScript code -->
+    <script>
+        // Array to store created matches
+        let matches = [];
+
+        // Function to submit match information
+        function submitMatch() {
+            // Current date
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Reset time part to compare only date part
+            // Match date from form input
+            const matchDate = new Date(document.getElementById("matchDate").value);
+
+            // Check if match date is in the future
+            if (matchDate <= today) {
+                document.getElementById("message").textContent = "Please enter a date that is at least one day in the future.";
+                return;
+            }
+
+            // Check if maximum matches limit is reached
+            if (matches.length >= 3) {
+                document.getElementById("message").textContent = "Maximum of 3 matches can be created.";
+                return;
+            }
+
+            // Get match information from form inputs
+            const name = document.getElementById("matchName").value;
+            const place = document.getElementById("matchPlace").value;
+            const date = document.getElementById("matchDate").value;
+            const time = document.getElementById("matchTime").value;
+            const fee = document.getElementById("matchFee").value;
+
+            // Create a paragraph element to display match information
+            const matchInfo = document.createElement("p");
+            matchInfo.innerHTML = `<strong>Match Name:</strong> ${name}, <strong>Location:</strong> ${place}, <strong>Date:</strong> ${date}, <strong>Time:</strong> ${time}, <strong>Entry Fee:</strong> £${fee}`;
+            // Append match information to result display area
+            document.getElementById("result").appendChild(matchInfo);
+            // Add match info to the array
+            matches.push(matchInfo);
+
+            // Clear error message
+            document.getElementById("message").textContent = "";
+        }
+
+        // Function to delete the least recent match
+        function deleteMatch() {
+            // Check if there are matches to delete
+            if (matches.length > 0) {
+                // Remove the first (least recent) match from array
+                const lastMatch = matches.shift();
+                // Remove match information from display
+                lastMatch.remove();
+                // Display success message
+                document.getElementById("message").textContent = "The least recent match has been deleted.";
+            } else {
+                // Display error message if no matches to delete
+                document.getElementById("message").textContent = "No matches to delete.";
+            }
+        }
+
+        // Function to show information message
+        function showInfo() {
+            // Display information message
+            document.getElementById("infoMessage").textContent = "The delete button removes the least recent match created.";
+        }
+    </script>
+</body>
+</html>

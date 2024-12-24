@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+    >
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Profile - BasketballAddictsLDN</title> <!-- Title of the page -->
+    <link rel="stylesheet" href="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/css/style.css"> 
+</head>
+
+<body>
+    
+    <header class="site-header">
+        <div class="container">
+            <!-- Logo with a link to the homepage -->
+            <h1 id="logo">
+                <a href="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/index.html" style="color: #ffffff; text-decoration: none;">
+                    <img src="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/images/bbicon.png" alt="Basketball Icon" height="35" /> BasketballAddictsLDN
+                </a>
+            </h1>
+        </div>
+    </header>
+
+    <!-- Profile section -->
+    <section id="profile">
+        <!-- Profile information -->
+        <h2 id="userName">User's Profile</h2>
+        <img src="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/images/account.png" alt="Profile Icon" height="100" />
+        <div id="information">
+            <h3>Information details</h3>
+            <p>Name - <span id="profileName"></span></p>
+            <p>Email - <span id="profileEmail"></span></p>
+            <p>Password - <span>******</span></p>
+        </div>
+        <!-- Buttons for navigation -->
+        <div class="buttons">
+            <button onclick="window.location.href='pickup.html'">Pickup</button>
+            <button onclick="window.location.href='areas.html'">Areas</button>
+            <button onclick="window.location.href='weather.html'">Weather</button>
+            <button onclick="window.location.href='file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/index.html'">Log Out</button>
+        </div>
+    </section>
+
+    
+    <script>	// JavaScript code to populate profile information 
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('user')); // Retrieve user data from local storage
+            if (user) {
+                document.getElementById('userName').textContent = `${user.name}'s Profile`; // Display user's name
+                document.getElementById('profileName').textContent = user.name; // Display user's name
+                document.getElementById('profileEmail').textContent = user.email; // Display user's email
+            } else {
+                // Redirect to sign-in page if no user data found
+                window.location.href = 'signin.html';
+            }
+        });
+    </script>
+</body>
+</html>

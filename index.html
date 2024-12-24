@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title -->
+    <title>BasketballAddictsLDN</title>
+    <!-- Link to CSS stylesheet -->
+    <link rel="stylesheet" href="css\style.css">
+</head>
+<body>
+    <!-- Header section -->
+    <header class="site-header">
+        <div class="container">
+            <!-- Logo -->
+            <h1 id="logo">
+                <img src="images\bbicon.png" alt="Basketball Icon" height="35" />
+                BasketballAddictsLDN
+            </h1>
+            <!-- Navigation menu -->
+            <nav>
+                <ul>
+                    <li><a href="pages\signin.html">Sign In</a></li>
+                    <li><a href="pages\areas.html">Areas</a></li>
+                    <li><a href="pages\pickup.html">Pick Up</a></li>
+                    <li><a href="pages\weather.html">Weather</a></li>
+                    <li><a href="pages\profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content section -->
+    <main class="container">
+        <!-- Introduction section -->
+        <section id="intro">
+            <h2>Welcome to BasketballAddictsLDN!</h2>
+            <p>Discover the best places to play basketball in London, whether parks or gyms, and connect with local players!</p>
+        </section>
+        <!-- Section for displaying basketball court areas -->
+        <section id="areas">
+            <h2>Best Basketball Courts In London</h2>
+        </section>
+    </main>
+
+    <!-- Footer section -->
+    <footer class="site-footer">
+        <div class="container">
+            <!-- Copyright information -->
+            <p>Copyright © 2023 BasketballAddictsLDN</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript script -->
+    <script>
+    // JavaScript code for dynamically adding basketball court areas
+    document.addEventListener('DOMContentLoaded', function() {
+        // Array of basketball court areas
+        const areas = [
+            { 
+                name: 'Ravenscourt Park', 
+                address: '23 Ravenscourt Park',
+                url: 'https://www.bing.com/search?q=ravenscourt+park&filters=dtbk:%22MCFvdmVydmlldyFvdmVydmlldyE4MGE0NmNhYS1kZDQ5LWY1ZWYtYjkyNC0yZWJkYjZhN2ZiZjE%3d%22+sid:%2280a46caa-dd49-f5ef-b924-2ebdb6a7fbf1%22+tphint:%22f%22&FORM=DEPNAV'
+            },
+            { 
+                name: 'Argyle Square Public Basketball Court', 
+                address: 'Argyle Square, London WC1H 8AS',
+                url: 'https://www.bing.com/maps?q=Argyle+Square+Public+Basketball+Court&FORM=HDRSC7&cp=51.529425%7E-0.122116&lvl=16.0'
+            },
+            { 
+                name: 'Finsbury Park', 
+                address: 'Finsbury Park, London N4 4LX',
+                url: 'https://www.courtsoftheworld.com/united-kingdom/london/finsbury-park/'
+            },
+        ];
+
+        // Container element for displaying areas
+        const areaContainer = document.getElementById('areas');
+        // Loop through each area and create corresponding HTML elements
+        areas.forEach(area => {
+            const areaElement = document.createElement('div');
+            // Check if area has a URL
+            if (area.url) {
+                // If URL exists, create a link element
+                areaElement.innerHTML = `<h3><a href="${area.url}" target="_blank">${area.name}</a></h3><p>${area.address}</p>`;
+            } else {
+                // If URL doesn't exist, display only name and address
+                areaElement.innerHTML = `<h3>${area.name}</h3><p>${area.address}</p>`;
+            }
+            // Append the area element to the container
+            areaContainer.appendChild(areaElement);
+        });
+    });
+    </script>
+</body>
+</html>

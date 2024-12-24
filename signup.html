@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - BasketballAddictsLDN</title>
+    <link rel="stylesheet" href="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 id="logo">
+                <a href="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/index.html" style="color: #ffffff; text-decoration: none;">
+                    <img src="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/images/bbicon.png" alt="Basketball Icon" height="35" /> BasketballAddictsLDN
+                </a>
+            </h1>
+        </div>
+    </header>
+<!-- Sign Up section -->
+<section id="signup">
+    <!-- Sign Up title -->
+    <h2>Sign Up</h2>
+    <!-- Sign Up form -->
+    <form id="signupForm">
+        <!-- Name input -->
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <!-- Email input -->
+        <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+        <!-- Password input -->
+        <input type="password" id="signup-password" name="password" placeholder="Enter your password" required>
+        <!-- Sign Up button -->
+        <input type="button" value="Sign Up" onclick="registerUser()">
+    </form>
+    <!-- Sign Up message display area -->
+    <div id="signupMessage"></div>
+    <!-- Sign In link -->
+    <p>Already have an account? <a href="signin.html">Sign in here</a></p>
+</section>
+
+<!-- JavaScript code for user registration -->
+<script>
+    // Function to register a new user
+    function registerUser() {
+        // Get values from input fields
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+
+        // Validate name - only letters allowed
+        if (!/^[a-zA-Z ]*$/.test(name)) {
+            document.getElementById('signupMessage').innerText = 'Name must contain only letters.';
+            return;
+        }
+
+        // Check for empty fields
+        if (!name || !email || !password) {
+            document.getElementById('signupMessage').innerText = 'Please fill in all fields.';
+            return;
+        }
+
+        // Save user data to localStorage
+        localStorage.setItem('user', JSON.stringify({ name, email, password }));
+        // Redirect to sign-in page after successful registration
+        window.location.href = 'signin.html'; // Redirect to sign-in page
+    }
+</script>

@@ -1,0 +1,68 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - BasketballAddictsLDN</title>
+    <link rel="stylesheet" href="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/css/style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+
+            <h1 id="logo">
+                <a href="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/index.html" style="color: #ffffff; text-decoration: none;">
+                    <img src="file:///C:/Users/eyusu/OneDrive/Desktop/CO2104_CW2_EY51/BasketballAddictsLdn/images/bbicon.png" alt="Basketball Icon" height="35" /> BasketballAddictsLDN
+                </a>
+            </h1>
+        </div>
+    </header>
+
+    <!-- Sign In section -->
+    <section id="signin">
+        <!-- Sign In title -->
+        <h2>Sign In</h2>
+        <!-- Sign In form -->
+        <form id="signinForm">
+            <!-- Email input -->
+            <input type="email" id="signin-email" name="email" placeholder="Enter your email" required>
+            <!-- Password input -->
+            <input type="password" id="signin-password" name="password" placeholder="Enter your password" required>
+            <!-- Sign In button -->
+            <input type="button" value="Sign In" onclick="verifyUser()">
+        </form>
+        <!-- Sign In message display area -->
+        <div id="signinMessage"></div>
+        <!-- Sign Up link -->
+        <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+    </section>
+
+    <!-- JavaScript code for user verification -->
+    <script>
+        // Function to verify user credentials
+        function verifyUser() {
+            // Retrieve user data from local storage
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+            // Get email and password from input fields
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+
+            // Check if email and password are provided
+            if (!email || !password) {
+                document.getElementById('signinMessage').innerText = 'Please fill in all fields.';
+                return;
+            }
+
+            // Check if user exists and credentials are correct
+            if (!storedUser || storedUser.email !== email || storedUser.password !== password) {
+                document.getElementById('signinMessage').innerText = 'No existing account or password is incorrect.';
+                return;
+            }
+
+            // Redirect to profile page if credentials are correct
+            window.location.href = 'profile.html'; // Redirect to profile page
+        }
+    </script>
+</body>
+</html>
